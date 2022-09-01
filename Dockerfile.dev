@@ -1,0 +1,16 @@
+FROM node:16-alpine
+
+# alpine tag require a WORKDIR or throws an error
+WORKDIR '/app'
+
+# first arg: (current dir) second arg: (where to copy)
+COPY package.json .
+# install all of the dependencies
+RUN npm install
+
+RUN mkdir -p node_modules/.cache && chmod -R 777 node_modules/.cache
+
+# now the rest of the working files
+COPY . .
+
+CMD ["npm", "run", "start"]
