@@ -27,6 +27,6 @@ deploy:
   on:
     branch: master
   # environmental vars created in AWS (IAM), and imported in Travis
-  access_key_id: $AWS_ACESS_KEY
+  access_key_id: "$AWS_ACESS_KEY"
   secret_access_key: "$AWS_SECRET_KEY"
 
