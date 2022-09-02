@@ -1,0 +1,12 @@
+language: generic
+sudo: required
+services:
+  - docker
+
+before_install:
+  # How to get <image-id>, use Github tag
+  - docker build -t newenay/docker-react -f Dockerfile.dev .
+
+script:
+  # Run test suite, change environmental variable
+  - docker run -e CI=true newenay/docker-react npm run test
