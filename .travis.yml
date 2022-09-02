@@ -10,3 +10,23 @@ before_install:
 script:
   # Run test suite, change environmental variable
   - docker run -e CI=true newenay/docker-react npm run test
+
+deploy:
+  # Travis CI knows what to do with this
+  provider: elasticbeanstalk
+  # found in url: http://dockerreact-env.eba-cixju3zu.us-east-1.elasticbeanstalk.com/
+  region: "us-east-1"
+  # See pic on 07_readme.md for guidance
+  app: "docker-react"
+  env: "Dockerreact-env"
+  # Search AWS searchbar for 'S3 bucket', then click 'buckets'
+  bucket_name: "elasticbeanstalk-us-east-1-123793844064"
+  # folder may not yet exist in bucket, but name same as appName
+  bucket_path: "docker-react"
+  # only deploy master branches, not feature branches
+  on:
+    branch: master
+  # environmental vars created in AWS (IAM), and imported in Travis
+  access_key_id: $AWS_ACESS_KEY
+  secret_access_key: "$AWS_SECRET_KEY"
+
